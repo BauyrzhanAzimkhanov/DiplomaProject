@@ -82,3 +82,15 @@ class Lecture(models.Model):
 
     def __str__(self):
         return f'{self.id}: {self.studyWeek} | {self.course}'
+
+class Absence(models.Model):
+    students = models.ManyToManyField(User, on_delete=models.CASCADE, null=True, related_name='students')
+    lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE, null=True, related_name='lectures')
+    
+
+    class Meta:
+        verbose_name = 'Absence'
+        verbose_name_plural = 'Absence'
+
+    def __str__(self):
+        return f'{self.id}: '
