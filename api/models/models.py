@@ -71,6 +71,17 @@ class Comment(models.Model):
     def __str__(self):
         return f'{self.id} - {self.sender}'
 
+class Discipline(models.Model):
+    name = models.CharField(max_length=128)
+    code = models.CharField(max_length=8)
+    description = models.TextField(default='')
+    
+    class Meta:
+        verbose_name = 'Discipline'
+        verbose_name_plural = 'Disciplines'
+    
+    def __str__(self):
+        return f'{self.id}: {self.code} | {self.name} - {self.description}.'
 
 class User(models.Model):
     kbtuId = models.CharField(max_length=10)
@@ -93,15 +104,50 @@ class User(models.Model):
     def __str__(self):
         return f'{self.id}: {self.firstName} {self.lastName} : id={self.kbtuId}'
 
+class Semester(models.Model):
+    name = models.CharField(max_length=20)
+    startingDate = models.DateField()
+    endingDate = models.DateField()
 
-class Discipline(models.Model):
-    name = models.CharField(max_length=128)
-    code = models.CharField(max_length=8)
-    description = models.TextField(default='')
-    
     class Meta:
-        verbose_name = 'Discipline'
-        verbose_name_plural = 'Disciplines'
+        verbose_name = 'Semester'
+        verbose_name_plural = 'Semesters'
     
     def __str__(self):
-        return f'{self.id}: {self.code} | {self.name} - {self.description}.'
+        return f'{self.id}: {self.name} starting at {self.startingDate.__str__} untill {self.endingDate.__str__}'
+
+class Course(models.Model):
+    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, null=True, related_name='semester')
+    courseCode = models.CharField(max_length=8)
+    descritpion = models.TextField(default='')
+    prerequisites = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='prerequisites')
+
+    class Meta:
+        verbose_name = 'Course'
+        verbose_name_plural = 'Courses'
+
+    def __str__(self):
+        return f'{self.id}: {self.courseCode}'
+
+class Lecture(models.Model):
+    theme = models.TextField('')
+    topics = models.TextField('')
+    studyWeek = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(16)])
+    date = models.DateField()
+    startingTime = models.TimeField()
+    endingTime = models.TimeField()
+    classRoom = models.CharField(max_length=32)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, related_name='course')
+    isLecture = models.BooleanField(default=False)
+    isPractice = models.BooleanField(default=False)
+    isMidterm = models.BooleanField(default=False)
+    isFinal = models.BooleanField(default=False)
+    isFX = models.BooleanField(default=False)
+    isQuiz = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Lecture'
+        verbose_name_plural = 'Lectures'
+
+    def __str__(self):
+        return f'{self.id}: {self.studyWeek} | {self.course}'
