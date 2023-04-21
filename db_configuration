@@ -1,0 +1,8 @@
+1. Users (id, kbtuId, firstName, middleName, lastName, yearOfStudy, isTeacher, isAssistant, isAdmin, gpa, abcsenceCount, finishedCourseId, studyingCourseId)
+2. courses (id, semesterId, courseCode, description, prerequisite, prerequisite)
+3. lectures (id, theme, topics, studyWeek, date, startingTime, endingTime, classRoom, courseId, isLecture, isPractice, isMidterm, isEndterm, isFinal, isFx, isQuiz)
+4. absencesOrLate (id, user, lectureId, isAbsence)
+5. marks (id, studentId, lectureId, homeWorkId, classWorkMark, homeWorkMark)
+6. homeWorks (id, topic, description, lectureId, startDate, deadlineDate)
+7. classMaterials (id, lectureId, binData)
+8. HomeWorkMaterial (id, homeWorkMaterialId, binData)
