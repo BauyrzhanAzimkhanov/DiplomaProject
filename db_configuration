@@ -1,8 +1,13 @@
-1. Users (id, kbtuId, firstName, middleName, lastName, yearOfStudy, isTeacher, isAssistant, isAdmin, gpa, abcsenceCount, finishedCourseId, studyingCourseId)
-2. courses (id, semesterId, courseCode, description, prerequisite, prerequisite)
-3. lectures (id, theme, topics, studyWeek, date, startingTime, endingTime, classRoom, courseId, isLecture, isPractice, isMidterm, isEndterm, isFinal, isFx, isQuiz)
-4. absencesOrLate (id, user, lectureId, isAbsence)
-5. marks (id, studentId, lectureId, homeWorkId, classWorkMark, homeWorkMark)
-6. homeWorks (id, topic, description, lectureId, startDate, deadlineDate)
-7. classMaterials (id, lectureId, binData)
-8. HomeWorkMaterial (id, homeWorkMaterialId, binData)
+[] - primary key
+<> - foreign key
+<[]> - many to many relationship
+self.<> - foreign/primary key for object of the same class/table
+
+1. Semester (id, name, startingDate, endingDate, [courses])
+2. Course (id, <semester>, courseCode, description, self.<prerequisites>, <[courseFinishedUsers]>, [courseStudyingUser], [lectures])
+3. User (id, kbtuId, firstName, middleName, lastName, yearOfStudy, isTeacher, isAssistant, isAdmin, gpa, <[finishedCourses]>, <studyingCourse>, [marks], [absenceOrLate])
+4. Lecture (id, theme, topics, studyWeek, date, startingTime, endingTime, classRoom, <course>, isLecture, isPractice, isMidterm, isEndterm, isFinal, isFx, isQuiz, [absentOrLateStudents], [works])
+5. AbsenceOrLate (id, <student>, <lecture>, isAbsence)
+6. Work (id, topic, description, <lecture>, startDate, deadlineDate, startingTime, endingTime, isHomeWork, isLecture, isPractice, isMidterm, isEndterm, isFinal, isFx, isQuiz, [workMaterial], [marks])
+7. WorkMaterial (id, <work>, binData)
+8. Mark (id, <student>, <work>, workMark)
