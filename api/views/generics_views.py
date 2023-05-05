@@ -13,58 +13,58 @@ class SemesterDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Semester.object.all()
     serializer_class = SemesterSerializer
 
-class ListAPIView(generics.ListCreateAPIView):
+class CourseListAPIView(generics.ListCreateAPIView):
     queryset = Course.object.all()
     serializer_class = CourseSerializer
 
-class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class CourseDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Course.object.all()
     serializer_class = CourseSerializer
 
-class ListAPIView(generics.ListCreateAPIView):
+class UserListAPIView(generics.ListCreateAPIView):
     queryset = User.object.all()
     serializer_class = UserSerializer
 
-class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.object.all()
     serializer_class = UserSerializer
 
-class ListAPIView(generics.ListCreateAPIView):
+class LectureListAPIView(generics.ListCreateAPIView):
     queryset = Lecture.object.all()
     serializer_class = LectureSerializer
 
-class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class LectureDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Lecture.object.all()
     serializer_class = LectureSerializer
 
-class ListAPIView(generics.ListCreateAPIView):
+class AbsenceOrLateListAPIView(generics.ListCreateAPIView):
     queryset = AbsenceOrLate.object.all()
     serializer_class = AbsenceOrLateSerializer
 
-class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class AbsenceOrLateDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = AbsenceOrLate.object.all()
     serializer_class = AbsenceOrLateSerializer
 
-class ListAPIView(generics.ListCreateAPIView):
+class WorkListAPIView(generics.ListCreateAPIView):
     queryset = Work.object.all()
     serializer_class = WorkSerializer
 
-class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class WorkDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Work.object.all()
     serializer_class = WorkSerializer
 
-class ListAPIView(generics.ListCreateAPIView):
+class WorkMaterialListAPIView(generics.ListCreateAPIView):
     queryset = WorkMaterial.object.all()
     serializer_class = WorkMaterialSerializer
 
-class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class WorkMaterialDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = WorkMaterial.object.all()
     serializer_class = WorkMaterialSerializer
 
-class ListAPIView(generics.ListCreateAPIView):
+class MarkListAPIView(generics.ListCreateAPIView):
     queryset = Mark.object.all()
     serializer_class = MarkSerializer
 
-class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class MarkDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Mark.object.all()
     serializer_class = MarkSerializer
