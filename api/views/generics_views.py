@@ -1,61 +1,70 @@
 from rest_framework import generics, mixins
 from rest_framework.permissions import IsAuthenticated
 
-from api.serializers import ShippingSerializer, ImageSerializer, CommentSerializer, \
-    CategorySerializer, ProductSerializer
-from api.serializers.serializers import *
-from api.models import Category, Product, Shipping, Comment, Image
+from api.serializers.model_serializers import SemesterSerializer, CourseSerializer, UserSerializer, LectureSerializer, AbsenceOrLateSerializer, WorkSerializer, WorkMaterialSerializer, MarkSerializer
+from api.models.models import Semester, Course, User, Lecture, AbsenceOrLate, Work, WorkMaterial, Mark
 
 
-class CategoryListAPIView(generics.ListCreateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-    # permission_classes = (IsAuthenticated,)
+class SemesterListAPIView(generics.ListCreateAPIView):
+    queryset = Semester.object.all()
+    serializer_class = SemesterSerializer
 
+class SemesterDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Semester.object.all()
+    serializer_class = SemesterSerializer
 
+class ListAPIView(generics.ListCreateAPIView):
+    queryset = Course.object.all()
+    serializer_class = CourseSerializer
 
-class CategoryDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Course.object.all()
+    serializer_class = CourseSerializer
 
+class ListAPIView(generics.ListCreateAPIView):
+    queryset = User.object.all()
+    serializer_class = UserSerializer
 
-class ProductListAPIView(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.object.all()
+    serializer_class = UserSerializer
 
+class ListAPIView(generics.ListCreateAPIView):
+    queryset = Lecture.object.all()
+    serializer_class = LectureSerializer
 
-class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Lecture.object.all()
+    serializer_class = LectureSerializer
 
+class ListAPIView(generics.ListCreateAPIView):
+    queryset = AbsenceOrLate.object.all()
+    serializer_class = AbsenceOrLateSerializer
 
-class ImageListAPIView(generics.ListCreateAPIView):
-    queryset = Image.objects.all()
-    serializer_class = ImageSerializer2
+class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = AbsenceOrLate.object.all()
+    serializer_class = AbsenceOrLateSerializer
 
+class ListAPIView(generics.ListCreateAPIView):
+    queryset = Work.object.all()
+    serializer_class = WorkSerializer
 
-class ImageDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Image.objects.all()
-    serializer_class = ImageSerializer2
+class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Work.object.all()
+    serializer_class = WorkSerializer
 
+class ListAPIView(generics.ListCreateAPIView):
+    queryset = WorkMaterial.object.all()
+    serializer_class = WorkMaterialSerializer
 
-class ShippingListAPIView(generics.ListCreateAPIView):
-    queryset = Shipping.objects.all()
-    serializer_class = ShippingSerializer2
+class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = WorkMaterial.object.all()
+    serializer_class = WorkMaterialSerializer
 
+class ListAPIView(generics.ListCreateAPIView):
+    queryset = Mark.object.all()
+    serializer_class = MarkSerializer
 
-class ShippingDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Shipping.objects.all()
-    serializer_class = ShippingSerializer2
-
-
-class CommentListAPIView(generics.ListCreateAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = (IsAuthenticated,)
-
-
-class CommentDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = (IsAuthenticated,)
+class DetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Mark.object.all()
+    serializer_class = MarkSerializer
