@@ -2,13 +2,13 @@ from django.urls import path
 
 # from rest_framework_jwt.views import obtain_jwt_token
 
-from api.views.generics_views import *
+from api.views import SemesterListAPIView, SemesterDetailAPIView, CourseListAPIView, CourseDetailAPIView, UserListAPIView, UserDetailAPIView, LectureListAPIView, LectureDetailAPIView, AbsenceOrLateListAPIView, AbsenceOrLateDetailAPIView, WorkListAPIView, WorkDetailAPIView, WorkMaterialListAPIView, WorkMaterialDetailAPIView, MarkListAPIView, MarkDetailAPIView
 
 urlpatterns = [
     # CBV
 
     path('semesters/', SemesterListAPIView.as_view()),
-    path('semesters/', SemesterDetailAPIView.as_view()),
+    path('semesters/<int:pk>/', SemesterDetailAPIView.as_view()),
 
     path('courses/', CourseListAPIView.as_view()),
     path('courses/<int:pk>/', CourseDetailAPIView.as_view()),
@@ -26,7 +26,7 @@ urlpatterns = [
     path('works/<int:pk>/', WorkDetailAPIView.as_view()),
 
     path('work_materials/', WorkMaterialListAPIView.as_view()),
-    path('work_materials/', WorkMaterialDetailAPIView.as_view()),
+    path('work_materials/<int:pk>/', WorkMaterialDetailAPIView.as_view()),
 
     path('marks/', MarkListAPIView.as_view()),
     path('marks/<int:pk>/', MarkDetailAPIView.as_view()),

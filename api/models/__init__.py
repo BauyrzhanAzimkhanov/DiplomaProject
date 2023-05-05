@@ -1,1 +1,1 @@
-from .models import Category, Product, Image, Comment, Shipping
+from .models import Semester, Course, User, Lecture, AbsenceOrLate, Work, WorkMaterial, Mark

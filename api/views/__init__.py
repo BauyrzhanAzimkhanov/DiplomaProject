@@ -1,4 +1,1 @@
-from .generics_views import ImageListAPIView, ShippingListAPIView, ProductListAPIView, ImageDetailAPIView, \
-   CommentListAPIView, CategoryListAPIView, ProductDetailAPIView, CategoryDetailAPIView, ShippingDetailAPIView, CommentDetailAPIView, 
-
-from .fbv_views import *
+from .generics_views import SemesterListAPIView, SemesterDetailAPIView, CourseListAPIView, CourseDetailAPIView, UserListAPIView, UserDetailAPIView, LectureListAPIView, LectureDetailAPIView, AbsenceOrLateListAPIView, AbsenceOrLateDetailAPIView, WorkListAPIView, WorkDetailAPIView, WorkMaterialListAPIView, WorkMaterialDetailAPIView, MarkListAPIView, MarkDetailAPIView 

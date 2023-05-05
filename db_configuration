@@ -4,10 +4,10 @@
 self.<> - foreign/primary key for object of the same class/table
 
 1. Semester (id, name, startingDate, endingDate, [courses])
-2. Course (id, <semester>, courseCode, description, self.<prerequisites>, <[courseFinishedUsers]>, [courseStudyingUser], [lectures])
+2. Course (id, <semester>, courseCode, description, self.<prerequisiteList>, <[courseFinishedUsers]>, [courseStudyingUser], [lectures])
 3. User (id, kbtuId, firstName, middleName, lastName, yearOfStudy, isTeacher, isAssistant, isAdmin, gpa, <[finishedCourses]>, <studyingCourse>, [marks], [absencesOrLates])
 4. Lecture (id, theme, topics, studyWeek, date, startingTime, endingTime, classRoom, <course>, isLecture, isPractice, isMidterm, isEndterm, isFinal, isFx, isQuiz, [absentOrLateStudents], [works])
 5. AbsenceOrLate (id, <student>, <lecture>, isAbsence)
 6. Work (id, topic, description, <lecture>, startDate, deadlineDate, startingTime, endingTime, isHomeWork, isLecture, isPractice, isMidterm, isEndterm, isFinal, isFx, isQuiz, [workMaterial], [marks])
-7. WorkMaterial (id, <work>, binData)
+7. WorkMaterial (id, <work>, file)
 8. Mark (id, <student>, <work>, workMark)

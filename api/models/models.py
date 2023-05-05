@@ -12,13 +12,13 @@ class Semester(models.Model):
         verbose_name_plural = 'Semesters'
     
     def __str__(self):
-        return f'{self.id}: {self.name} starting at {self.startingDate.__str__} untill {self.endingDate.__str__}'
+        return f'{self.id}: {self.name} starting at {self.startingDate} until {self.endingDate}'
     
 class Course(models.Model):
-    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, null=True, related_name='courses')
+    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, null=True, blank=True, related_name='courses')
     courseCode = models.CharField(max_length=8)
     description = models.TextField(default='')
-    prerequisites = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='subPrerequisites')
+    prerequisites = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='prerequisiteList')
 
     class Meta:
         verbose_name = 'Course'
@@ -37,8 +37,8 @@ class User(models.Model):
     isAssistant = models.BooleanField(default=False)
     isAdmin = models.BooleanField(default=False)
     gpa = models.FloatField(default=1.0, validators=[MinValueValidator(1.0), MaxValueValidator(4.0)])
-    finishedCourses = models.ManyToManyField(Course, on_delete=models.CASCADE, null=True, related_name='courseFinishedUsers')
-    studyingCourse = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, related_name='courseStudyingUser')
+    finishedCourses = models.ManyToManyField(Course, null=True, related_name='courseFinishedUsers')
+    studyingCourse = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True, related_name='courseStudyingUsers')
 
     class Meta:
         verbose_name = 'User'
@@ -55,12 +55,13 @@ class Lecture(models.Model):
     startingTime = models.TimeField()
     endingTime = models.TimeField()
     classRoom = models.CharField(max_length=32)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, related_name='lectures')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True, related_name='lectures')
     isLecture = models.BooleanField(default=False)
     isPractice = models.BooleanField(default=False)
     isMidterm = models.BooleanField(default=False)
+    isEndterm = models.BooleanField(default=False)
     isFinal = models.BooleanField(default=False)
-    isFX = models.BooleanField(default=False)
+    isFx = models.BooleanField(default=False)
     isQuiz = models.BooleanField(default=False)
 
     class Meta:
@@ -71,8 +72,8 @@ class Lecture(models.Model):
         return f'{self.id}: {self.studyWeek} | {self.course}'
 
 class AbsenceOrLate(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='absencesOrLates')
-    lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE, null=True, related_name='absentOrLateStudents')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='absencesOrLates')
+    lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE, null=True, blank=True, related_name='absentOrLateStudents')
     isAbsence = models.BooleanField(default=False)
 
     class Meta:
@@ -85,7 +86,7 @@ class AbsenceOrLate(models.Model):
 class Work(models.Model):
     topic = models.TextField('')
     description = models.TextField('')
-    lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE, null=True, related_name='works')
+    lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE, null=True, blank=True, related_name='works')
     startDate = models.DateField()
     deadlineDate = models.DateField()
     startingTime = models.TimeField()
@@ -94,8 +95,9 @@ class Work(models.Model):
     isLecture = models.BooleanField(default=False)
     isPractice = models.BooleanField(default=False)
     isMidterm = models.BooleanField(default=False)
+    isEndterm = models.BooleanField(default=False)
     isFinal = models.BooleanField(default=False)
-    isFX = models.BooleanField(default=False)
+    isFx = models.BooleanField(default=False)
     isQuiz = models.BooleanField(default=False)
 
     class Meta:
@@ -106,8 +108,8 @@ class Work(models.Model):
         return f'{self.id}: {self.topic}'
 
 class WorkMaterial(models.Model):
-    work = models.ForeignKey(Work, on_delete=models.CASCADE, null=True, related_name='workMaterial')
-    binData = models.BinaryField()
+    work = models.ForeignKey(Work, on_delete=models.CASCADE, null=True, blank=True, related_name='workMaterial')
+    file = models.FileField(editable=True)
 
     class Meta:
         verbose_name = 'Work material'
@@ -117,8 +119,8 @@ class WorkMaterial(models.Model):
         return f'{self.id}: {self.work}'
 
 class Mark(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='marks')
-    work = models.ForeignKey(Work, on_delete=models.CASCADE, null=True, related_name='marks')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='marks')
+    work = models.ForeignKey(Work, on_delete=models.CASCADE, null=True, blank=True, related_name='marks')
     workMark = models.FloatField(default=0.0, validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
 
     class Meta:

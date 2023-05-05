@@ -1,2 +1,1 @@
-from .model_serializers import ShippingSerializer, CategorySerializer, CommentSerializer, ProductSerializer, \
-    ImageSerializer, ProductSerializerId
+from .model_serializers import SemesterSerializer, CourseSerializer, UserSerializer, LectureSerializer, AbsenceOrLateSerializer, WorkSerializer, WorkMaterialSerializer, MarkSerializer
