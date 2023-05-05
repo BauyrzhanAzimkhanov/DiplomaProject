@@ -18,7 +18,7 @@ class Course(models.Model):
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, null=True, related_name='courses')
     courseCode = models.CharField(max_length=8)
     description = models.TextField(default='')
-    prerequisites = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='prerequisites')
+    prerequisites = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='subPrerequisites')
 
     class Meta:
         verbose_name = 'Course'
@@ -71,7 +71,7 @@ class Lecture(models.Model):
         return f'{self.id}: {self.studyWeek} | {self.course}'
 
 class AbsenceOrLate(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='absenceOrLate')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='absencesOrLates')
     lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE, null=True, related_name='absentOrLateStudents')
     isAbsence = models.BooleanField(default=False)
 
